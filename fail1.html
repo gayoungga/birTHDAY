@@ -2,66 +2,112 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>초대장</title>
+  <title>점심 퀴즈</title>
   <style>
     body {
-      font-family: '나눔고딕', 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      background: #dad6d6; /* 회색 배경 */
-      color: #333333; /* 전체 텍스트 검정 */
+      font-family: '맑은 고딕', sans-serif;
       text-align: center;
+      padding: 50px;
+      background-color: #dad6d6;
     }
-    p.info {
-      font-size: 1.1rem;
-      margin: 5px 0;
-      color: #000;
+
+    .question {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      cursor: pointer;
     }
-    p.info strong {
-      font-weight: bold;
+
+    .choices {
+      margin: 20px 0;
     }
+
     button {
-      display: block;
-      width: 100%;
-      padding: 15px 0;
-      margin: 12px 0;
-      font-size: 1.1rem;
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      background-color: #2B2727; /* 진한 회색 버튼 */
+      background-color: #2b2727;
       color: white;
-      transition: background 0.3s ease;
+      transition: background 0.3s;
     }
+
     button:hover {
-      background-color: #2B2727; /* 진한 회색 버튼 */
+      background-color: #ff1493;
     }
-    img.title-image {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 15px;
+
+    .answer {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .check-button {
+      margin-top: 30px;
+      background-color: #4CAF50;
     }
   </style>
 </head>
 <body>
-  <img src="images/초대장.PNG" alt="초대장" />
+  
+<p style="font-size: 1.2rem; margin-bottom: 10px;">
+  벌써 점심시간이 다가온다<br>
+  내가 먹고싶은 건 ..
+</p>
+  
+  <div class="question" onclick="resetInputs()">
+    <span class="answer" id="blankA">____</span> 가 좋아하는 
+    <span class="answer" id="blankB">____</span>
+  </div>
 
-  <br><p class="info"><strong>일정:</strong> 2025년 9월 13일 (토)</p>
-  <p class="info"><strong>대상:</strong> 나랑 너</p><br>
+  <div class="choices">
+    <button onclick="selectChoice('회전초밥')">회전초밥</button>
+    <button onclick="selectChoice('장어덮밥')">장어덮밥</button>
+    <button onclick="selectChoice('편의점 컵라면 꿀조합')">편의점 컵라면 꿀조합</button>
+    <button onclick="selectChoice('굶기')">굶기</button>
+    <button onclick="selectChoice('가영이')">가영이</button>
+    <button onclick="selectChoice('태현이')">태현이</button>
+  </div>
 
-  <button onclick="location.href='m1.html'">좋아, 당연히 가야지!</button>
-<!-- 👇 아래 버튼에 페이드아웃 효과 추가 -->
-  <button onclick="fadeAndGo('fail2.html')">음... 귀찮은데 나가지말까?</button>
+  <button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
 
   <script>
-    function fadeAndGo(url) {
-      document.body.classList.add("fade-out");
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800); // 0.8초 후 이동
+    let a = '';
+    let b = '';
+
+    function selectChoice(choice) {
+      if (!a) {
+        a = choice;
+        document.getElementById('blankA').textContent = a;
+      } else if (!b) {
+        b = choice;
+        document.getElementById('blankB').textContent = b;
+      }
+    }
+
+    function resetInputs() {
+      if (b) {
+        b = '';
+        document.getElementById('blankB').textContent = '____';
+      } else if (a) {
+        a = '';
+        document.getElementById('blankA').textContent = '____';
+      }
+    }
+
+    function checkAnswer() {
+      if (!a || !b) {
+        alert('아직 빈 칸이 남아있다');
+        return;
+      }
+
+      if (a === '태현이' && b === '장어덮밥') {
+        window.location.href = 'lunch.html';
+      } else {
+        window.location.href = 'starving.html';
+      }
     }
   </script>
+
 </body>
 </html>
