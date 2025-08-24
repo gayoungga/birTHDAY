@@ -56,12 +56,12 @@
   <button onclick="fadeAndGo('fail1.html')">아니, 집 밖은 위험해!</button>
 
   <script>
-    function fadeAndGo(url) {
-      document.body.classList.add("fade-out");
-      setTimeout(() => {
-        window.location.href = url;
-      }, 800); // 0.8초 후 이동
-    }
+    function shakeAndGo(url) {
+  document.body.classList.add('shake');
+  setTimeout(() => {
+    window.location.href = url;
+  }, 400);
+}
   </script>
 </body>
 </html>
