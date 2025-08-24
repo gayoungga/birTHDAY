@@ -51,7 +51,17 @@
   <br><p class="info"><strong>일정:</strong> 2025년 9월 13일 (토)</p>
   <p class="info"><strong>대상:</strong> 나랑 너</p><br>
 
-  <button onclick="location.href='mission.html'">좋아, 당연히 가야지!</button>
-  <button onclick="location.href='lazy.html'">음... 주말은 쉬고 싶은데...</button>
+  <button onclick="location.href='m1.html'">좋아, 당연히 가야지!</button>
+<!-- 👇 아래 버튼에 페이드아웃 효과 추가 -->
+  <button onclick="fadeAndGo('fail1.html')">아니, 집 밖은 위험해!</button>
+
+  <script>
+    function fadeAndGo(url) {
+      document.body.classList.add("fade-out");
+      setTimeout(() => {
+        window.location.href = url;
+      }, 800); // 0.8초 후 이동
+    }
+  </script>
 </body>
 </html>
