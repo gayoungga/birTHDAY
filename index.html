@@ -43,27 +43,36 @@
       height: auto;
       margin-bottom: 15px;
     }
+
+      /* 흔들림 애니메이션 */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  
   </style>
 </head>
 <body>
   <img src="images/초대장.PNG" alt="초대장" />
 
   <br><br><br>
-  <p class="info"><strong?안녕👋<br>내 생일파티에<br>너를 초대할게.<br>꼭 와주길 바래</strong></p>
+  <p class="info"><strong>안녕👋<br>내 생일파티에<br>너를 초대할게.<br>꼭 와주길 바래</strong><br><br><br></p>
   <p class="info"><strong>일정:</strong> 2025년 9월 13일 (토)</p>
   <p class="info"><strong>대상:</strong> 나랑 너</p><br>
 
   <button onclick="location.href='m1.html'">좋아, 당연히 가야지!</button>
-<!-- 👇 아래 버튼에 페이드아웃 효과 추가 -->
   <button onclick="fadeAndGo('fail1.html')">아니, 집 밖은 위험해!</button>
 
   <script>
-    function shakeAndGo(url) {
-  document.body.classList.add('shake');
-  setTimeout(() => {
-    window.location.href = url;
-  }, 400);
-}
+    function fadeAndGo(url) {
+      document.body.classList.add('shake'); // 흔들림 시작
+      setTimeout(() => {
+        window.location.href = url; // 애니메이션 후 페이지 이동
+      }, 400); // 0.4초 = 애니 시간
+    }
   </script>
 </body>
 </html>
