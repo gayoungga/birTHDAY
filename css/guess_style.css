@@ -57,7 +57,16 @@ body {
   margin: 20px 0;
 }
 
-.button {
+    p.info {
+      font-size: 1.1rem;
+      margin: 5px 0;
+      color: #000;
+    }
+    p.info strong {
+      font-weight: bold;
+    }
+
+button {
   display: block;
   width: 100%;
   padding: 15px 0;
@@ -71,11 +80,11 @@ body {
   transition: background 0.3s ease;
 }
 
-.button:hover {
+button:hover {
   background-color: #2b2727;
 }
 
-.img.title-image {
+img.title-image {
   max-width: 100%;
   height: auto;
   margin-bottom: 15px;
