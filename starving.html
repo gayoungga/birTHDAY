@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>배고파</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* 간단 스타일 */
+    #randomText {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #randomImage {
+      display: block;
+      margin: 0 auto;
+      max-width: 80%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div id="randomText"></div>
+<img id="randomImage" src="" alt="랜덤 이미지" />
+<button class="check-button" onclick="location.href='guess.html'">다시 선택하기</button>
+  
+<script>
+  // 글과 이미지 세트 배열
+  const contentList = [
+    {
+      text: "하필 오늘 휴무네...",
+      imgSrc: "images/휴무.jpg"
+    },
+    {
+      text: "웨이팅이 너무 길어",
+      imgSrc: "images/웨이팅.jpg"
+    },
+    {
+      text: "재고 소진으로 영업 종료...",
+      imgSrc: "images/영업종료.jpg"
+    }
+  ];
+
+  function showRandomContent() {
+    const randomIndex = Math.floor(Math.random() * contentList.length);
+    const selected = contentList[randomIndex];
+
+    document.getElementById('randomText').textContent = selected.text;
+    const img = document.getElementById('randomImage');
+    img.src = selected.imgSrc;
+    img.alt = selected.text;  // 이미지 alt도 글과 동일하게
+  }
+
+  window.onload = showRandomContent;
+</script>
+  
+</body>
+</html>
