@@ -9,7 +9,7 @@
 <body>
 <p style="font-size: 1.2rem; margin-bottom: 10px;">
   점심시간이 다가오고 있다.<br>
-  내가 원하는 건...
+  내가 먹고싶은 건...
 </p>
 
 <div class="question-container" onclick="removeLastWord()">
@@ -27,6 +27,14 @@
   <button onclick="selectChoice('좋아하는')">좋아하는</button>
 </div>
 
+  <!-- 모달창 영역 -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img src="images/surp.jpg" alt="허걱" style="max-width:100%; height:auto;" />
+  </div>
+</div>
+  
 <button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
 
 <script>
@@ -90,13 +98,33 @@ const MAX_INPUT = 5;
     } else if (phrase === '태현이 좋아하는 장어덮밥') {
       window.location.href = 'lunch.html';
     } else if (phrase === '가영이 좋아하는 태현이') {
-      window.location.href = 'b1.html';
+      openModal();
     } else if (phrase === '태현이 좋아하는 가영이') {
-      window.location.href = 'b2.html';
+      openModal();
     } else {
       window.location.href = 'starving.html';
     }
   }
+
+  #모달창
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("openModalBtn");
+const span = document.querySelector(".close");
+
+btn.onclick = function() {
+  modal.style.display = "flex"; // flex로 변경해서 중앙정렬
+  }
+};
+
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 
   // 초기 표시
   renderWords();
