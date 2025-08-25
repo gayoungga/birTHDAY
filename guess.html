@@ -4,133 +4,129 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/guess_style.css" />
+  <title>오늘의 점심은</title>
 </head>
 
 <body>
-<p style="font-size: 1.2rem; margin-bottom: 10px;">
-  점심시간이 다가오고 있다.<br>
-  내가 먹고싶은 건...
-</p>
+  <p style="font-size: 1.2rem; margin-bottom: 10px;">
+    점심시간이 다가오고 있다.<br>
+    내가 먹고싶은 건...
+  </p>
 
-<div class="question-container" onclick="removeLastWord()">
-  <div class="underlined-area" id="underlined"></div>
-  <div class="extra-area" id="extra"></div>
-</div>
+  <div class="question-container" onclick="removeLastWord()">
+    <div class="underlined-area" id="underlined"></div>
+    <div class="extra-area" id="extra"></div>
+  </div>
 
-<div class="choices">
-  <button onclick="selectChoice('회전초밥')">회전초밥</button>
-  <button onclick="selectChoice('장어덮밥')">장어덮밥</button>
-  <button onclick="selectChoice('컵라면 꿀조합')">컵라면 꿀조합</button>
-  <button onclick="selectChoice('굶기')">굶기</button><br>
-  <button onclick="selectChoice('가영이')">가영이</button>
-  <button onclick="selectChoice('태현이')">태현이</button>
-  <button onclick="selectChoice('좋아하는')">좋아하는</button>
-</div>
+  <div class="choices">
+    <button onclick="selectChoice('회전초밥')">회전초밥</button>
+    <button onclick="selectChoice('장어덮밥')">장어덮밥</button>
+    <button onclick="selectChoice('컵라면 꿀조합')">컵라면 꿀조합</button>
+    <button onclick="selectChoice('굶기')">굶기</button>
+    <button onclick="selectChoice('가영이')">가영이</button>
+    <button onclick="selectChoice('태현이')">태현이</button>
+    <button onclick="selectChoice('좋아하는')">좋아하는</button>
+  </div>
+
+  <button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
 
   <!-- 모달창 영역 -->
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <img src="images/surp.jpg" alt="허걱" style="max-width:auto; height:auto;" />
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="images/surp.jpg" alt="허걱" style="max-width:auto; height:auto;" />
+    </div>
   </div>
-</div>
-  
-<button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
 
-<script>
-  
-const MAX_INPUT = 5;
-  let selectedWords = [];
+  <script>
+    const MAX_INPUT = 5;
+    let selectedWords = [];
 
-  function selectChoice(word) {
-    if (selectedWords.length >= MAX_INPUT) {
-      alert('더 이상 선택할 수 없어!');
-      return;
-    }
-    selectedWords.push(word);
-    renderWords();
-  }
-
-  function renderWords() {
-  const underlinedDiv = document.getElementById('underlined');
-  const extraDiv = document.getElementById('extra');
-  underlinedDiv.innerHTML = '';
-  extraDiv.innerHTML = '';
-
-  // 1~3칸: 밑줄 영역
-  for (let i = 0; i < 3; i++) {
-    const span = document.createElement('span');
-    if (selectedWords[i]) {
-      span.className = 'underlined-word';
-      span.textContent = selectedWords[i];
-    } else {
-      span.className = 'empty-underline';
-    }
-    underlinedDiv.appendChild(span);
-  }
-
-  // 4~5칸: extra-word 클래스로 밑줄 표시
-  for (let i = 3; i < selectedWords.length; i++) {
-    const span = document.createElement('span');
-    span.className = 'extra-word';
-    span.textContent = selectedWords[i];
-    extraDiv.appendChild(span);
-  }
-}
-
-  function removeLastWord() {
-    if (selectedWords.length > 0) {
-      selectedWords.pop();
+    function selectChoice(word) {
+      if (selectedWords.length >= MAX_INPUT) {
+        alert('더 이상 선택할 수 없어!');
+        return;
+      }
+      selectedWords.push(word);
       renderWords();
     }
-  }
 
-  function checkAnswer() {
-    const phrase = selectedWords.join(' ');
+    function renderWords() {
+      const underlinedDiv = document.getElementById('underlined');
+      const extraDiv = document.getElementById('extra');
+      underlinedDiv.innerHTML = '';
+      extraDiv.innerHTML = '';
 
-    if (selectedWords.length === 0) {
-      alert('먼저 선택지를 입력해줘!');
-      return;
+      // 1~3칸: 밑줄 영역
+      for (let i = 0; i < 3; i++) {
+        const span = document.createElement('span');
+        if (selectedWords[i]) {
+          span.className = 'underlined-word';
+          span.textContent = selectedWords[i];
+        } else {
+          span.className = 'empty-underline';
+        }
+        underlinedDiv.appendChild(span);
+      }
+
+      // 4~5칸: extra-word 클래스로 밑줄 표시
+      for (let i = 3; i < selectedWords.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'extra-word';
+        span.textContent = selectedWords[i];
+        extraDiv.appendChild(span);
+      }
     }
 
-    if (phrase === '가영이 좋아하는 태현이 좋아하는 장어덮밥') {
-      window.location.href = 'special.html';
-    } else if (phrase === '태현이 좋아하는 장어덮밥') {
-      window.location.href = 'lunch.html';
-    } else if (phrase === '가영이 좋아하는 태현이') {
-      openModal();
-    } else if (phrase === '태현이 좋아하는 가영이') {
-      openModal();
-    } else {
-      window.location.href = 'starving.html';
+    function removeLastWord() {
+      if (selectedWords.length > 0) {
+        selectedWords.pop();
+        renderWords();
+      }
     }
-  }
 
-  #모달창
-const modal = document.getElementById("myModal");
-const btn = document.getElementById("openModalBtn");
-const span = document.querySelector(".close");
+    function checkAnswer() {
+      const phrase = selectedWords.join(' ');
 
-btn.onclick = function() {
-  modal.style.display = "flex"; // flex로 변경해서 중앙정렬
-  if (navigator.vibrate) {
-  navigator.vibrate(200); // 200ms 진동
-  }
-};
+      if (selectedWords.length === 0) {
+        alert('먼저 선택지를 입력해줘!');
+        return;
+      }
 
-span.onclick = function() {
-  modal.style.display = "none";
-};
+      if (phrase === '가영이 좋아하는 태현이 좋아하는 장어덮밥') {
+        window.location.href = 'special.html';
+      } else if (phrase === '태현이 좋아하는 장어덮밥') {
+        window.location.href = 'lunch.html';
+      } else if (phrase === '가영이 좋아하는 태현이' || phrase === '태현이 좋아하는 가영이') {
+        openModal();
+      } else {
+        window.location.href = 'starving.html';
+      }
+    }
 
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-};
+    // 모달 관련
+    const modal = document.getElementById("myModal");
+    const span = document.querySelector(".close");
 
-  // 초기 표시
-  renderWords();
-</script>
+    function openModal() {
+      modal.style.display = "flex";
+      if (navigator.vibrate) {
+        navigator.vibrate(200);
+      }
+    }
 
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    };
+
+    // 초기 렌더
+    renderWords();
+  </script>
 </body>
 </html>
