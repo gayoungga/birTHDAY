@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>장어덮밥</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <br><br><br>
+  <p class="info"><strong>🚩 히든페이지</strong></p><br>
+  <p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 히든페이지 접근에 성공했어 *</p><br><br>
+  <br><br>
+  <hr>
+  <br><br>
+  <p style="font-size: 1.2rem; margin-bottom: 10px;">Q: 너의 발 사이즈는?</p><br><br>
+
+<input type="text" id="answerInput" placeholder="답을 입력하세요" style="padding: 10px; font-size: 1rem;" />
+<br><br>
+<button onclick="checkSubjectiveAnswer()" style="padding: 10px 20px; font-size: 1rem;">제출하기</button>
+
+<p id="feedback" style="margin-top: 20px; font-size: 1.1rem;"></p>
+
+<script>
+  function checkSubjectiveAnswer() {
+    const input = document.getElementById("answerInput").value.trim();
+    const feedback = document.getElementById("feedback");
+
+    const correctAnswers = ["230", "235"]; // 정답 추가 가능
+
+    if (correctAnswers.includes(input)) {
+      feedback.innerHTML = "힌트1"<br?"미정";
+    } else {
+      feedback.textContent = "아니지롱";
+    }
+
+    // 3초 후 페이지 이동
+    setTimeout(() => {
+      window.location.href = "lunch.html";
+    }, 3000);
+  }
+</script>
+
+</body>
+</html>
