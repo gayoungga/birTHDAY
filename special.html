@@ -3,55 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>장어덮밥</title>
+  <title>주관식 퀴즈</title>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* 모달 오버레이 배경 */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5); /* 어두운 반투명 배경 */
+      z-index: 9998;
+      display: none;
+    }
+
+    /* 모달 텍스트 박스 */
+    #feedbackModal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #333;
+      z-index: 9999;
+      display: none;
+      text-align: center;
+    }
+
+    /* 중앙 정렬용 */
+    .center-container {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1rem;
+      width: 200px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.4rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .info {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 10px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <br><br><br>
-  <p class="info"><strong>🚩 히든페이지</strong></p><br>
-  <p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 히든페이지 접근에 성공했어 *</p><br><br>
-  <br>
-  <hr>
-  <br><br>
-  <p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 숫자만 입력해, 기회는 2번뿐이야 *</p><br>
-  <p style="font-size: 1.2rem; margin-bottom: 10px;"><strong>Q:</strong> 너의 발 사이즈는?</p><br><br>
-  <input type="text" id="answerInput" placeholder="답을 입력하세요" style="padding: 10px; font-size: 1rem;" /><br>
-  <br><br><br>
+<div class="center-container">
+  <p style="font-size: 1.2rem;"><strong>Q:</strong> 너의 발 사이즈는?</p>
+  <input type="text" id="answerInput" placeholder="숫자만 입력해" />
+  <p class="info">* 기회는 2번뿐이야 *</p>
+  <button onclick="checkSubjectiveAnswer()">제출하기</button>
+</div>
 
-  <button onclick="checkSubjectiveAnswer()" 
-    style="padding: 10px 20px; max-width:200px; font-size: 1.4rem; background-color: #4CAF50">제출하기</button>
+<!-- 모달창처럼 쓰는 요소들 -->
+<div id="overlay"></div>
+<div id="feedbackModal"></div>
 
-  <p id="feedback" style="margin-top: 20px; font-size: 1.1rem;"></p>
+<script>
+  let attemptCount = 0;
+  const correctAnswers = ["230"]; // 원하는 정답 입력
 
-  <script>
-    let attemptCount = 0; // 시도 횟수
-    const correctAnswers = ["230"]; // 정답 리스트
+  function showModalMessage(message, callback) {
+    const overlay = document.getElementById("overlay");
+    const modal = document.getElementById("feedbackModal");
 
-    function checkSubjectiveAnswer() {
-      const input = document.getElementById("answerInput").value.trim();
-      const feedback = document.getElementById("feedback");
+    modal.textContent = message;
+    overlay.style.display = "block";
+    modal.style.display = "block";
 
-      attemptCount++;
+    setTimeout(() => {
+      modal.style.display = "none";
+      overlay.style.display = "none";
+      if (callback) callback();
+    }, 3000);
+  }
 
-      if (correctAnswers.includes(input)) {
-        feedback.innerHTML = "힌트1는 '미정'";
-        setTimeout(() => {
-          window.location.href = "lunch.html";
-        }, 5000);
+  function checkSubjectiveAnswer() {
+    const input = document.getElementById("answerInput").value.trim();
+
+    attemptCount++;
+
+    if (correctAnswers.includes(input)) {
+      showModalMessage("힌트1는 '미정'", () => {
+        window.location.href = "lunch.html";
+      });
+    } else {
+      if (attemptCount === 1) {
+        showModalMessage("아니지롱, 이번이 마지막 기회야");
+        document.getElementById("answerInput").value = "";
       } else {
-        if (attemptCount === 1) {
-          feedback.textContent = "아니지롱, 이번이 마지막 기회야";
-          document.getElementById("answerInput").value = ""; // 입력값 초기화
-        } else {
-          feedback.textContent = "아니지롱";
-          setTimeout(() => {
-            window.location.href = "lunch.html";
-          }, 3000);
-        }
+        showModalMessage("아니지롱", () => {
+          window.location.href = "lunch.html";
+        });
       }
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
