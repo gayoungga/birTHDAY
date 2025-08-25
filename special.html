@@ -14,33 +14,44 @@
   <br><br>
   <hr>
   <br><br>
-  <p style="font-size: 1.2rem; margin-bottom: 10px;">Q: 너의 발 사이즈는?</p><br><br>
+  <p style="font-size: 1.2rem; margin-bottom: 10px;"><strong>Q:</strong> 너의 발 사이즈는?</p><br><br>
 
-<input type="text" id="answerInput" placeholder="답을 입력하세요" style="padding: 10px; font-size: 1rem;" />
-<br><br>
+<input type="text" id="answerInput" placeholder="답을 입력하세요" style="padding: 10px; font-size: 1rem;" /><br>
+<p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 숫자만 입력해, 기회는 2번뿐이야 *</p><br>
+<br><br><br>
 <button onclick="checkSubjectiveAnswer()" style="padding: 10px 20px; font-size: 1rem;">제출하기</button>
 
 <p id="feedback" style="margin-top: 20px; font-size: 1.1rem;"></p>
 
 <script>
+  let attemptCount = 0; // 시도 횟수
+  const correctAnswers = ["270", "270mm"]; // 정답 리스트
+
   function checkSubjectiveAnswer() {
     const input = document.getElementById("answerInput").value.trim();
     const feedback = document.getElementById("feedback");
 
-    const correctAnswers = ["230", "235"]; // 정답 추가 가능
+    attemptCount++;
 
     if (correctAnswers.includes(input)) {
-      feedback.innerHTML = "힌트1"<br?"미정";
+      feedback.innerHTML = "힌트1"<br>"미정";
+      setTimeout(() => {
+        window.location.href = "lunch.html";
+      }, 5000);
     } else {
-      feedback.textContent = "아니지롱";
+      if (attemptCount === 1) {
+        feedback.textContent = "아니지롱" <br> "이번이 마지막 기회야";
+        document.getElementById("answerInput").value = ""; // 입력값 초기화
+      } else {
+        feedback.textContent = "아니지롱";
+        setTimeout(() => {
+          window.location.href = "lunch.html";
+        }, 3000);
+      }
     }
-
-    // 3초 후 페이지 이동
-    setTimeout(() => {
-      window.location.href = "lunch.html";
-    }, 3000);
   }
 </script>
+
 
 </body>
 </html>
