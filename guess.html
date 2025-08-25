@@ -31,7 +31,7 @@
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <img src="images/surp.jpg" alt="허걱" style="max-width:100%; height:auto;" />
+    <img src="images/surp.jpg" alt="허걱" style="max-width:auto; height:auto;" />
   </div>
 </div>
   
@@ -113,6 +113,8 @@ const span = document.querySelector(".close");
 
 btn.onclick = function() {
   modal.style.display = "flex"; // flex로 변경해서 중앙정렬
+  if (navigator.vibrate) {
+  navigator.vibrate(200); // 200ms 진동
   }
 };
 
