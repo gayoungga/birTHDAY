@@ -68,7 +68,7 @@ body {
     }
 
 button {
-  display: block;
+  display: inline-block;
   width: auto;
   padding: 10px 20px;
   margin: 5px 10px;
