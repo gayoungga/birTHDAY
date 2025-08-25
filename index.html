@@ -16,14 +16,37 @@
 <p>생일파티에 초대받았다<br>마침 약속 없는 주말, 갈까? 말까?</p><br>
   
   <button onclick="location.href='go.html'">좋아, 당연히 가야지!</button>
-  <button onclick="alert('다시 생각해보자')"; "vibratePhone()">아니, 집 밖은 위험해!</button>
+  <button id="openModalBtn">아니, 집 밖은 위험해!</button>
 
+<!-- 모달창 영역 -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img src="images/hing.png" alt="힝" style="max-width:100%; height:auto;" />
+  </div>
+</div>
+  
 <script>
-  function vibratePhone() {
-    if (navigator.vibrate) {
-      navigator.vibrate(200); // 200ms 진동
-    } 
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("openModalBtn");
+const span = document.querySelector(".close");
+
+btn.onclick = function() {
+  modal.style.display = "flex"; // flex로 변경해서 중앙정렬
+  if (navigator.vibrate) {
+    navigator.vibrate(200); // 200ms 진동
   }
+};
+
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+window.onclick = function(event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 </script>
   
 </body>
