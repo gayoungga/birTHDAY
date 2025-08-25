@@ -11,7 +11,7 @@
   <br><br><br>
   <p class="info"><strong>🚩 히든페이지</strong></p><br>
   <p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 히든페이지 접근에 성공했어 *</p><br><br>
-  <br><br>
+  <br>
   <hr>
   <br><br>
   <p style="font-size: 1.2rem; margin-bottom: 10px;"><strong>Q:</strong> 너의 발 사이즈는?</p><br><br>
@@ -19,13 +19,14 @@
 <input type="text" id="answerInput" placeholder="답을 입력하세요" style="padding: 10px; font-size: 1rem;" /><br>
 <p style="font-size: 0.8rem; margin-bottom: 10px; color:#555555">* 숫자만 입력해, 기회는 2번뿐이야 *</p><br>
 <br><br><br>
-<button onclick="checkSubjectiveAnswer()" style="padding: 10px 20px; font-size: 1rem;">제출하기</button>
+<button onclick="checkSubjectiveAnswer()" 
+  style="padding: 10px 20px; max-size:120px; font-size: 1.7rem; background-color: #4CAF50">제출하기</button>
 
 <p id="feedback" style="margin-top: 20px; font-size: 1.1rem;"></p>
 
 <script>
   let attemptCount = 0; // 시도 횟수
-  const correctAnswers = ["270", "270mm"]; // 정답 리스트
+  const correctAnswers = ["230"]; // 정답 리스트
 
   function checkSubjectiveAnswer() {
     const input = document.getElementById("answerInput").value.trim();
