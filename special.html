@@ -35,13 +35,13 @@
     attemptCount++;
 
     if (correctAnswers.includes(input)) {
-      feedback.innerHTML = "힌트1"<br>"미정";
+      feedback.innerHTML = "힌트1는 '미정'";
       setTimeout(() => {
         window.location.href = "lunch.html";
       }, 5000);
     } else {
       if (attemptCount === 1) {
-        feedback.textContent = "아니지롱" <br> "이번이 마지막 기회야";
+        feedback.textContent = "아니지롱, 이번이 마지막 기회야";
         document.getElementById("answerInput").value = ""; // 입력값 초기화
       } else {
         feedback.textContent = "아니지롱";
