@@ -1,113 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <title>메뉴가 뭐였더라</title>
-  <style>
-    body {
-      font-family: '맑은 고딕', sans-serif;
-      text-align: center;
-      padding: 50px;
-      background-color: #dad6d6;
-    }
-
-    .question {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-
-    .choices {
-      margin: 20px 0;
-    }
-
-    button {
-      margin: 5px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: #2b2727;
-      color: white;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #ff1493;
-    }
-
-    .answer {
-      font-weight: bold;
-      color: #333;
-    }
-
-    .check-button {
-      margin-top: 30px;
-      background-color: #4CAF50;
-    }
-  </style>
-</head>
-<body>
-  
 <p style="font-size: 1.2rem; margin-bottom: 10px;">
-  벌써 점심시간이 다가온다<br>
-  내가 먹고싶은 건 ..
+  점심시간이 다가오고 있다.<br>
+  내가 원하는 건...
 </p>
-  
-  <div class="question" onclick="resetInputs()">
-    <span class="answer" id="blankA">____</span> 가 좋아하는 
-    <span class="answer" id="blankB">____</span>
-  </div>
 
-  <div class="choices">
-    <button onclick="selectChoice('회전초밥')">회전초밥</button>
-    <button onclick="selectChoice('장어덮밥')">장어덮밥</button>
-    <button onclick="selectChoice('편의점 컵라면 꿀조합')">편의점 컵라면 꿀조합</button>
-    <button onclick="selectChoice('굶기')">굶기</button>
-    <button onclick="selectChoice('가영이')">가영이</button>
-    <button onclick="selectChoice('태현이')">태현이</button>
-  </div>
+<div class="question-container" onclick="removeLastWord()">
+  <div class="underlined-area" id="underlined"></div>
+  <div class="extra-area" id="extra"></div>
+</div>
 
-  <button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
+<div class="choices">
+  <button onclick="selectChoice('회전초밥')">회전초밥</button>
+  <button onclick="selectChoice('장어덮밥')">장어덮밥</button>
+  <button onclick="selectChoice('컵라면 꿀조합')">컵라면 꿀조합</button>
+  <button onclick="selectChoice('굶기')">굶기</button>
+  <button onclick="selectChoice('가영이')">가영이</button>
+  <button onclick="selectChoice('태현이')">태현이</button>
+  <button onclick="selectChoice('좋아하는')">좋아하는</button>
+</div>
 
-  <script>
-    let a = '';
-    let b = '';
-
-    function selectChoice(choice) {
-      if (!a) {
-        a = choice;
-        document.getElementById('blankA').textContent = a;
-      } else if (!b) {
-        b = choice;
-        document.getElementById('blankB').textContent = b;
-      }
-    }
-
-    function resetInputs() {
-      if (b) {
-        b = '';
-        document.getElementById('blankB').textContent = '____';
-      } else if (a) {
-        a = '';
-        document.getElementById('blankA').textContent = '____';
-      }
-    }
-
-    function checkAnswer() {
-      if (!a || !b) {
-        alert('아직 빈 칸이 남아있다');
-        return;
-      }
-
-      if (a === '태현이' && b === '장어덮밥') {
-        window.location.href = 'lunch.html';
-      } else {
-        window.location.href = 'starving.html';
-      }
-    }
-  </script>
-
-</body>
-</html>
+<button class="check-button" onclick="checkAnswer()">이게 먹고 싶어</button>
